@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Infinity Stones</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background:
+                radial-gradient(circle at 50% 20%, #24245a 0%, #09091c 35%, #020205 75%);
+            overflow-x: hidden;
+        }
+
+        /* Stars */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+            background-size: 80px 80px, 130px 130px;
+            background-position: 10px 20px, 50px 70px;
+            opacity: 0.25;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 70px 20px 40px;
+        }
+
+        header h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(
+                90deg,
+                #ff3131,
+                #ffd700,
+                #48ff72,
+                #36c8ff,
+                #a946ff,
+                #ff4fa3
+            );
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 8s linear infinite;
+        }
+
+        header p {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 18px;
+            letter-spacing: 3px;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 300%;
+            }
+        }
+
+        .stones {
+            width: min(1200px, 90%);
+            margin: 30px auto 80px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .stone-card {
+            position: relative;
+            min-height: 330px;
+            padding: 35px 25px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+
+            backdrop-filter: blur(12px);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+
+            overflow: hidden;
+        }
+
+        .stone-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.25;
+            transition: 0.4s;
+        }
+
+        .stone-card:hover {
+            transform: translateY(-12px) scale(1.03);
+        }
+
+        .stone-card:hover::before {
+            opacity: 0.7;
+            transform: scale(1.4);
+        }
+
+        /* Stone */
+        .stone {
+            width: 110px;
+            height: 110px;
+
+            margin-bottom: 25px;
+
+            clip-path: polygon(
+                50% 0%,
+                90% 20%,
+                100% 60%,
+                70% 100%,
+                30% 100%,
+                0% 60%,
+                10% 20%
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+            font-weight: bold;
+
+            box-shadow:
+                0 0 20px currentColor,
+                0 0 50px currentColor,
+                0 0 90px currentColor;
+
+            animation: pulse 2.5s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .stone-card h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .stone-card p {
+            color: #bdbdbd;
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        /* Individual stones */
+
+        .space .stone {
+            background: #087cff;
+            color: #087cff;
+        }
+
+        .space::before {
+            background: #087cff;
+        }
+
+        .mind .stone {
+            background: #ffe600;
+            color: #ffe600;
+        }
+
+        .mind::before {
+            background: #ffe600;
+        }
+
+        .reality .stone {
+            background: #ff1717;
+            color: #ff1717;
+        }
+
+        .reality::before {
+            background: #ff1717;
+        }
+
+        .power .stone {
+            background: #a600ff;
+            color: #a600ff;
+        }
+
+        .power::before {
+            background: #a600ff;
+        }
+
+        .time .stone {
+            background: #20e85a;
+            color: #20e85a;
+        }
+
+        .time::before {
+            background: #20e85a;
+        }
+
+        .soul .stone {
+            background: #ff8c00;
+            color: #ff8c00;
+        }
+
+        .soul::before {
+            background: #ff8c00;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+        }
+
+        footer span {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stones {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stones {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding-top: 40px;
+            }
+
+            header h1 {
+                letter-spacing: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Infinity Stones</h1>
+        <p>Six stones. Infinite power.</p>
+    </header>
+
+    <main class="stones">
+
+        <div class="stone-card space">
+            <div class="stone">✦</div>
+            <h2>Space Stone</h2>
+            <p>
+                The Space Stone grants its wielder control over space itself,
+                allowing instantaneous travel across vast distances.
+            </p>
+        </div>
+
+        <div class="stone-card mind">
+            <div class="stone">◆</div>
+            <h2>Mind Stone</h2>
+            <p>
+                The Mind Stone provides extraordinary mental abilities,
+                including enhanced intelligence and control over consciousness.
+            </p>
+        </div>
+
+        <div class="stone-card reality">
+            <div class="stone">◇</div>
+            <h2>Reality Stone</h2>
+            <p>
+                The Reality Stone can alter the fundamental nature of reality
+                and reshape the world around its wielder.
+            </p>
+        </div>
+
+        <div class="stone-card power">
+            <div class="stone">✹</div>
+            <h2>Power Stone</h2>
+            <p>
+                The Power Stone contains immense destructive energy and can
+                dramatically amplify the abilities of its user.
+            </p>
+        </div>
+
+        <div class="stone-card time">
+            <div class="stone">◉</div>
+            <h2>Time Stone</h2>
+            <p>
+                The Time Stone allows its wielder to manipulate time and
+                perceive possible events across different timelines.
+            </p>
+        </div>
+
+        <div class="stone-card soul">
+            <div class="stone">♦</div>
+            <h2>Soul Stone</h2>
+            <p>
+                The mysterious Soul Stone possesses power connected to life,
+                souls, and the essence of living beings.
+            </p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            The Infinity Stones &nbsp;•&nbsp;
+            <span>Marvel Universe</span>
+        </p>
+    </footer>
+
+</body>
+</html>
